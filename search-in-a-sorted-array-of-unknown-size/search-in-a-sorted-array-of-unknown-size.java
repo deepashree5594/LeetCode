@@ -1,3 +1,7 @@
+// Time Complexity : O(logn)
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : Yes
+​
 /**
  * // This is ArrayReader's API interface.
  * // You should not implement it, or speculate about its implementation
@@ -6,6 +10,8 @@
  * }
  */
 ​
+​
+// Initially, start with 2 elements and if the target is greater than the element at 'r', double the value of 'r'. 
 class Solution {
     public int search(ArrayReader reader, int target) {
         int l = 0;

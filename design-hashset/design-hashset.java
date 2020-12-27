@@ -1,48 +1,59 @@
+// Time Complexity : O(N/B) : N - all possible input elements , B - no. of buckets
+// Space Complexity : O(B + N) : N - no. of unique input elements, B - no. of buckets here it is 100
+// Did this code successfully run on Leetcode : Yes
+​
 class MyHashSet {
 ​
     /** Initialize your data structure here. */
-    List<List<Integer>> parentList;
-    int maxSize = 100;
+    
+    // Creating a list of 100 buckets
+    int bucketsSize;
+    int bucketItemsSize;
+    boolean buckets[][];
+    boolean bucketItems[];
     
     public MyHashSet() {
-      parentList = new ArrayList<>(maxSize);        
-      for(int i = 0; i < maxSize; i++)
-      {
-          parentList.add(null);
-      }
+     bucketsSize = 1000;
+     bucketItemsSize = 1000;  
+     buckets = new boolean[bucketsSize][];
+    }
+    
+    private int getFirstHash(int key)
+    {
+        return key%bucketsSize;
+    }
+    private int getSecondHash(int key)
+    {
+        return key/bucketItemsSize;
     }
     
     public void add(int key) {
-        int index = key % maxSize;
-        List<Integer> list = parentList.get(index);
-        if ( list == null)
-        {
-            list = new ArrayList();
-            list.add(key);
-            parentList.set(index, list);
-        }
-        else
-        {
-            if (!list.contains(key))
-                list.add(key);
-        }
+       int firstHashindex = getFirstHash(key);
+       if (buckets[firstHashindex] == null)
+       {
+           buckets[firstHashindex] = new boolean[bucketItemsSize];
+       }
+       int secondHashIndex = getSecondHash(key);
+       buckets[firstHashindex][secondHashIndex] = true;
+          
     }
     
     public void remove(int key) {
-        int index = key % maxSize;
-        List<Integer> list = parentList.get(index);
-        if ( list != null)
-        {
-            list.remove(Integer.valueOf(key));
-        }
+       int firstHashindex = getFirstHash(key);
+       if (buckets[firstHashindex] == null)
+         return;
+       int secondHashIndex = getSecondHash(key);
+       buckets[firstHashindex][secondHashIndex] = false;
+           
     }
     
     /** Returns true if this set contains the specified element */
     public boolean contains(int key) {
-        int index = key % maxSize;
-        List<Integer> list = parentList.get(index);
-        return (list != null && list.contains(key));
-        
+        int firstHashindex = getFirstHash(key);
+        if (buckets[firstHashindex] == null)
+          return false;
+        int secondHashIndex = getSecondHash(key);
+        return buckets[firstHashindex][secondHashIndex];
     }
 }
 ​

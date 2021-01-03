@@ -1,52 +1,43 @@
-// class Solution {
-//     public boolean wordPattern(String pattern, String s) {
-//         HashMap map = new HashMap();
-//         String[] strs = s.split(" ");
-//         if (pattern.length() != strs.length)
-//                return false;
-        
-//         for (int i = 0; i < strs.length; i++ )
-//         {
-//             char c = pattern.charAt(i);
-//             String word = strs[i];
-            
-//             if (!map.containsKey(c))
-//             {
-//                 map.put(c, i);
-//             }
-//             if (!map.containsKey(word))
-//             {
-//                 map.put(word, i);
-//             }
-//             if (map.get(c) != map.get(word))
-//                 return false;
-//         }
-//         return true;
-//     }
-// }
 ​
 class Solution {
     public boolean wordPattern(String pattern, String s) {
-        HashMap map_index = new HashMap();
-        String[] words = s.split(" ");
-​
-        if (words.length != pattern.length())
-            return false;
-​
-        for (Integer i = 0; i < words.length; i++) {
+        HashMap<Character, String> pMap = new HashMap<Character, String>();
+        HashMap<String, Character> sMap = new HashMap<String, Character>();
+        String[] strs = s.split(" ");
+        if (pattern.length() != strs.length)
+               return false;
+        int i = 0; 
+        int j = 0;
+        while ( i<pattern.length() && j < strs.length )
+        {
+            String word = strs[j];
             char c = pattern.charAt(i);
-            String w = words[i];
-​
-            if (!map_index.containsKey(c))
-                map_index.put(c, i);
-​
-            if (!map_index.containsKey(w))
-                map_index.put(w, i);
-​
-            if (map_index.get(c) != map_index.get(w))
-                return false;
+            
+            if (!pMap.containsKey(c))
+            {
+                pMap.put(c, word);
+            }
+            else
+            {
+                if (!pMap.get(c).equals(word))
+                    return false;
+            }
+            if (!sMap.containsKey(word))
+            {
+                sMap.put(word, c);
+            }
+            else
+            {
+                if (sMap.get(word) != c)
+                    return false;
+            }
+            i++;
+            j++;
         }
-​
         return true;
-    }
+    }    
 }
+​
+​
+​
+​

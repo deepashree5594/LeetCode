@@ -1,22 +1,6 @@
-// class Solution {
-//     public int minFallingPathSum(int[][] A) {
-//         if (A == null || A.length == 0) 
-//             return 0;
-//         return helper(A, 0, 0, 0);
-//     }
-//     private int helper(int[][] A, int row, int currentElement, int minSum)
-//     {
-//         //base case
-        
-        
-        
-        
-//         //logic
-//         //case
-//     }
-// }
-​
-​
+// TC:O(N*N) -> N*N is the size of matrix A
+// SC:O(1) -> No extra space is required.
+// Did it run successfully on LeetCode? Yes
 class Solution {
     public int minFallingPathSum(int[][] A) {
         if (A == null || A.length == 0) 

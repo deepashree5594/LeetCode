@@ -1,3 +1,4 @@
+[Discussion Post (created on 10/0/2021 at 13:32)](https://leetcode.com/problems/group-anagrams/solution/)  
 <h2>49. Group Anagrams</h2><h3>Medium</h3><hr><div><p>Given an array of strings <code>strs</code>, group <strong>the anagrams</strong> together. You can return the answer in <strong>any order</strong>.</p>
 
 <p>An <strong>Anagram</strong> is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.</p>

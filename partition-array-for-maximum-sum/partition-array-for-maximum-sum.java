@@ -1,3 +1,6 @@
+// TC: O(N*K)
+// SC: O(N)
+// Did it run successfully On Leetcode? : Yes
 class Solution {
     public int maxSumAfterPartitioning(int[] arr, int k) {
         if ( arr == null || arr.length == 0)

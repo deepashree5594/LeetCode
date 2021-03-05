@@ -6,43 +6,42 @@
 // Did it run successfully on Leetcode? : Yes
 import java.util.NoSuchElementException;
 class PeekingIterator implements Iterator<Integer> {
-    private Iterator<Integer> iter;
-    private Integer peekedValue = null;
+    Iterator<Integer> it;
+    Integer peekValue = null;
     
 	public PeekingIterator(Iterator<Integer> iterator) {
 	    // initialize any member here.
-        iter = iterator;
+         it = iterator;
 	}
 	
     // Returns the next element in the iteration without advancing the iterator.
 	public Integer peek() {
-        if (peekedValue == null)
-        {
-            if (!iter.hasNext()) 
-                throw new NoSuchElementException();
-            peekedValue = iter.next();
-        } 
-        return peekedValue;
+       if (peekValue == null)
+       {
+           if (it.hasNext())
+               peekValue =  it.next();
+       }
+       return peekValue;
 	}
 	
 	// hasNext() and next() should behave the same as in the Iterator interface.
 	// Override them if needed.
 	@Override
 	public Integer next() {
-	    if (peekedValue != null) {
-            Integer toReturn = peekedValue;
-            peekedValue = null;
-            return toReturn;
-        }
-        if (!iter.hasNext()) {
+	  if (peekValue != null)
+      {
+          Integer toReturn = peekValue;
+          peekValue = null;
+          return toReturn;
+      }
+        if (!it.hasNext())
             throw new NoSuchElementException();
-        }
-        return iter.next();
+           return it.next();
 	}
 	
 	@Override
 	public boolean hasNext() {
-	    return peekedValue != null || iter.hasNext();
+	   return peekValue != null || it.hasNext();
 	}
 }
 

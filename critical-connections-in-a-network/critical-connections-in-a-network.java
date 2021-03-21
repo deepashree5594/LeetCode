@@ -1,3 +1,6 @@
+// TC: O(V+E)
+// SC: O(E)
+// Did it run successfully on Leetcode? : Yes
 class Solution {
     List<List<Integer>> graph;
     List<List<Integer>> result;
@@ -29,25 +32,25 @@ class Solution {
         }
         return graph;
     }
-    private void dfs(int[] discovery, int[] lowest, int curr, int parent)
+    private void dfs(int[] discovery, int[] lowest, int v, int u)  // v-> currentNode, u->parent
     {
         // base
-        if (discovery[curr] != -1)
+        if (discovery[v] != -1)
             return;
         // logic
-        discovery[curr] = time;
-        lowest[curr] = time;
+        discovery[v] = time;
+        lowest[v] = time;
         time++;
-        for (int neighbor : graph.get(curr))
+        for (int neighbor : graph.get(v))
         {
-            if (neighbor == parent)
+            if (neighbor == u)
                   continue;
-            dfs(discovery, lowest, neighbor, curr);
-            if (lowest[neighbor] > discovery[curr])
-                result.add(Arrays.asList(neighbor, curr));
-            if (lowest[curr] > lowest[neighbor])
+            dfs(discovery, lowest, neighbor, v);    // neighbor-> currentNode, v->parent
+            if (lowest[neighbor] > discovery[v])
+                result.add(Arrays.asList(neighbor, v));
+            if (lowest[v] > lowest[neighbor])
             {
-                lowest[curr] = lowest[neighbor];
+                lowest[v] = lowest[neighbor];
             }                
         }
     }

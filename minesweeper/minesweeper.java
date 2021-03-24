@@ -1,3 +1,6 @@
+//TC: O(M*N), M*N-> dimensions of the board
+//SC: O(M*N), M*N-> dimensions of the board
+// Did it run successfully on Leetcode? : Yes
 class Solution {
     int[][] dirs;
     public char[][] updateBoard(char[][] board, int[] click) {
@@ -41,8 +44,9 @@ class Solution {
         for (int[] dir: dirs){
             int r = i + dir[0];
             int c = j + dir[1];
-            if (r <= m-1 && r >=0 && c <= n-1 && c >=0 && board[r][c] == 'M')
+            if (r <= m-1 && r >=0 && c <= n-1 && c >=0 && board[r][c] == 'M'){
                 result++;
+            }
         }
         return result;
     }

@@ -1,3 +1,4 @@
+[Discussion Post (created on 25/2/2021 at 12:28)](https://leetcode.com/problems/repeated-dna-sequences/solution/)  
 <h2>187. Repeated DNA Sequences</h2><h3>Medium</h3><hr><div><p>The <strong>DNA sequence</strong> is composed of a series of nucleotides abbreviated as <code>'A'</code>, <code>'C'</code>, <code>'G'</code>, and <code>'T'</code>.</p>
 
 <ul>

@@ -26,25 +26,67 @@
  *     public List<NestedInteger> getList();
  * }
  */
+//BFS
+//TC: O(N)
+//SC: O(N)
+//Did it run successfully on Leetcode? :Yes
 class Solution {
-    int sum = 0;
     public int depthSum(List<NestedInteger> nestedList) {
         if (nestedList == null || nestedList.size() == 0)
-            return 0;
-        dfs(nestedList, 1);
-        return sum;
-    }
-    private void dfs(List<NestedInteger> nestedList, int depth){
-        //base
-    
-        //logic
-        for (NestedInteger nested : nestedList){
-            if (nested.isInteger()){
-                sum = sum + nested.getInteger() * depth;
+             return 0; 
+        Queue<NestedInteger> queue = new LinkedList();
+        Queue<Integer> depthQueue = new LinkedList();
+        int sum = 0;
+        for (NestedInteger element : nestedList){
+            queue.add(element);
+            depthQueue.add(1);
+        }
+        while (!queue.isEmpty()){
+            NestedInteger curr = queue.poll();
+            int currDepth = depthQueue.poll();
+            if (curr.isInteger()){
+                int n = curr.getInteger();
+                sum = sum + (n * currDepth);
             }
             else {
-                dfs(nested.getList(), depth+1);
+                List<NestedInteger> list = curr.getList();
+                for (NestedInteger n : list){
+                    queue.offer(n);
+                    depthQueue.offer(currDepth+1);
+                }
             }
         }
+      return sum;
     }
 }
+
+
+
+
+//DFS
+//TC: O(N)
+//SC: O(depth)
+//Did it run successfully on Leetcode? :Yes
+// class Solution {
+//     int sum;
+//     public int depthSum(List<NestedInteger> nestedList) {
+//         if (nestedList == null || nestedList.size() == 0)
+//             return 0;
+//         sum = 0;
+//         dfs(nestedList, 1);
+//         return sum;
+//     }
+//     private void dfs(List<NestedInteger> nestedList, int depth){
+//         //base  (not needed)
+    
+//         //logic
+//         for (NestedInteger nested : nestedList){
+//             if (nested.isInteger()){
+//                 sum = sum + nested.getInteger() * depth;
+//             }
+//             else {
+//                 dfs(nested.getList(), depth+1);
+//             }
+//         }
+//     }
+// }

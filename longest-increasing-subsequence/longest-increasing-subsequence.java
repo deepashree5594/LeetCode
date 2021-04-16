@@ -1,77 +1,18 @@
-// Binary Search 
-// TC: O(N^2)
-// SC: O(N)
-// Did ir run successfully on Leetcode? : Yes
 class Solution {
     public int lengthOfLIS(int[] nums) {
-        if ( nums == null || nums.length == 0)
+        int maxLen = 1;
+        if(nums == null || nums.length == 0)
             return 0;
-        int[] arr = new int[nums.length];
-        int len = 1;
-        arr[0] = nums[0];
-        int result = 1;
-        for ( int i = 1; i < arr.length; i++ )
-        {
-            if (nums[i] > arr[len-1])
-            {
-                arr[len] = nums[i];
-                len++;
-            }
-            else
-            {
-                int index = closestBinarySearch(arr, 0, len, nums[i]);
-                arr[index] = nums[i];
-            }
-           // result = Math.max(len, result);
-        }
-        return len;
-    }
-    private int closestBinarySearch(int[] arr, int low, int high, int target)
-    {
-        while ( low <= high)
-        {
-            int mid = low + (high-low)/2;
-            if ( arr[mid] == target)
-                return mid;
-            else if (arr[mid] > target)
-            {
-                high = mid - 1;
-            }
-            else
-            {
-                low = mid + 1;
+        int[] dp = new int[nums.length];
+        Arrays.fill(dp, 1);
+        for (int i = 0; i < nums.length ;i++){
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j]){
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                    maxLen = Math.max(maxLen, dp[i]);
+                }
             }
         }
-        return low;
+        return maxLen;
     }
 }
-
-
-
-
-
-// DP 
-// TC: O(N^2)
-// SC: O(N)
-// Did ir run successfully on Leetcode? : Yes
-// class Solution {
-//     public int lengthOfLIS(int[] nums) {
-//         if ( nums == null || nums.length == 0)
-//             return 0;
-//         int[] dp = new int[nums.length];
-//         Arrays.fill(dp, 1);
-//         int result = 1;
-//         for ( int i = 0; i < dp.length; i++)
-//         {
-//             for ( int j = 0 ; j < i; j++)
-//             {
-//                 if (nums[i] > nums[j] )
-//                 {
-//                     dp[i] = Math.max(dp[i], dp[j] + 1);
-//                     result = Math.max(result, dp[i]);
-//                 }
-//             }
-//         }
-//         return result;
-//     }
-// }

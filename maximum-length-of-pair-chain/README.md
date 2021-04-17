@@ -1,3 +1,4 @@
+[Discussion Post (created on 16/3/2021 at 17:5)](https://leetcode.com/problems/maximum-length-of-pair-chain/solution/)  
 <h2>646. Maximum Length of Pair Chain</h2><h3>Medium</h3><hr><div><p>
 You are given <code>n</code> pairs of numbers. In every pair, the first number is always smaller than the second number.
 </p>

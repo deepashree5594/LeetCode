@@ -1,45 +1,16 @@
-// // DP bottom-up
-// //TC: O(N)
-// //SC: O(N)
-// //Did it run successfully on Leetcode? : Yes
-// class Solution {
-//     public int minimumTotal(List<List<Integer>> triangle) {
-//         if (triangle == null || triangle.size() == 0)
-//             return 0;
-//         int[] dp = new int[triangle.size()];
-//         dp[0] = triangle.get(0).get(0);
-        
-//         // DP top-down
-//         for ( int i = dp.length - 2; i >=0; i-- ) {
-//             for ( int j = 0; j <= i; j++) {
-//                dp[j] = Math.min(dp[j], dp[j+1]) + triangle.get(i).get(j);
-//          }
-//        }
-//        return dp[0];
-//     }
-// }
-
-// DP top-down
-//TC: O(N)
-//SC: O(N)
-//Did it run successfully on Leetcode? : Yes
 class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
         if (triangle == null || triangle.size() == 0)
             return 0;
-
-        int[] dp = new int[triangle.size()];
-        
-        //populating last row
-        for (int j = 0; j < dp.length; j++)
-            dp[j] = triangle.get(dp.length-1).get(j);
-        
-        // DP bottom up- start from second-last row
-         for ( int i = dp.length - 2; i >= 0; i-- ) {
-            for ( int j = 0; j <= i; j++) {
-               dp[j] = Math.min(dp[j], dp[j+1]) + triangle.get(i).get(j);
-         }
-       }
-       return dp[0];
+        int m = triangle.size();
+        int n = triangle.get(m-1).size();
+        List<Integer> lastRow = triangle.get(m-1);
+        int[] dp = new int[m+1];
+        for ( int i = m-1; i>=0; i--){
+         for (int j = 0; j <= i; j++){
+             dp[j] = Math.min(dp[j], dp[j+1]) + triangle.get(i).get(j);
+          }
+        }
+      return dp[0];
     }
 }

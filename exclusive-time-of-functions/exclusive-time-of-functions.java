@@ -1,30 +1,25 @@
-// TC: O(2N)
-// SC: O(N)
-// Did it successfully run on Leetcode? : Yes
 class Solution {
     public int[] exclusiveTime(int n, List<String> logs) {
+        if (logs == null || logs.size() == 0)
+            return new int[0];
         int[] result = new int[n];
-        if ( logs == null || logs.size() == 0)
-            return result;
-        Stack<Integer> stack = new Stack();
         int prev = 0;
-        for (String log : logs)
-        {
-            String[] str = log.split(":");
-            int curr = Integer.parseInt(str[2]);
-            if (str[1].equals("start"))
-            {
-              if (!stack.isEmpty())
-              {
-                result[stack.peek()] +=  curr - prev;
-                prev = curr;
-              }
-              stack.push(Integer.parseInt(str[0]));
-            }
-            else
-            {
-                result[stack.pop()] += curr + 1 - prev;
+        int curr = 0;
+        Stack<Integer> stack = new Stack();
+        for (String log : logs){
+            String[] record = log.split(":");
+            if (record[1].equals("start")){
+                if (!stack.isEmpty()){
+                    curr = Integer.parseInt(record[2]);
+                    result[stack.peek()] =  result[stack.peek()] + (curr - prev);
+                    prev = curr;
+                }
+                stack.push(Integer.parseInt(record[0]));
+            } else {
+                curr = Integer.parseInt(record[2]);
+                result[stack.peek()] = result[stack.peek()] + (curr - prev + 1);
                 prev = curr+1;
+                stack.pop();
             }
         }
         return result;

@@ -1,53 +1,46 @@
-    private int getSecondIndex(int key)
-    {
-        return Integer.hashCode(key) / childArrSize;
-    }
-    /** value will always be non-negative. */
-    public void put(int key, int value) {
-       int firstHashIndex = getFirstIndex(key);
-       if (parentArr[firstHashIndex] == null)
-       {
-           parentArr[firstHashIndex] = new int[childArrSize];
-           Arrays.fill(parentArr[firstHashIndex], -1);
-       }
-       int secondHashIndex = getSecondIndex(key);
-       parentArr[firstHashIndex][secondHashIndex] = value;
-    }
-    /** Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key */
-    public int get(int key) {
-       int firstHashIndex = getFirstIndex(key);
-        if (parentArr[firstHashIndex] == null)
-            return -1;
-        int secondHashIndex = getSecondIndex(key);
-        return parentArr[firstHashIndex][secondHashIndex];
-    }
-    /** Removes the mapping of the specified value key if this map contains a mapping for the key */
-    public void remove(int key) {
-        int firstHashIndex = getFirstIndex(key);
-        if (parentArr[firstHashIndex] == null)
-             return;
-        int secondHashIndex = getSecondIndex(key);
-        parentArr[firstHashIndex][secondHashIndex] = -1;
-    }
+class MyHashMap {
+    /** Initialize your data structure here. */
+    int[][] array; 
+    int n;
+    public MyHashMap() {
+        n = 1000;
+        array = new int[n][n+1];
+        for (int[] row : array){
+            Arrays.fill(row, -1);
+        }
+    }
+    
+    /** value will always be non-negative. */
+    public void put(int key, int value) {
+        int index1 = key%n;
+        int index2 = key/n;
+        System.out.println("index1 = " + index1);
+         System.out.println("index2 = " + index2);
+        array[index1][index2] = value;
+    }
+    
+    /** Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key */
+    public int get(int key) {
+         int index1 = key%n;
+         int index2 = key/n;
+        int val =  array[index1][index2];
+        if (val != -1)
+            return val;
+        return -1;
+    }
+    
+    /** Removes the mapping of the specified value key if this map contains a mapping for the key */
+    public void remove(int key) {
+        int index1 = key%n;
+        int index2 = key/n;
+        array[index1][index2] = -1;
+    }
 }
-// import java.io.*;
-// class MyHashMap {
-    
-//     /** Initialize your data structure here. */
-//     static class Node{
-//         int key;
-//         int value;
-//         Node next;
-        
-//         Node(int key, int value)
-//         {
-//             this.key = key;
-//             this.value = value;
-//             this.next = null;
-//         }  
-//     }
-    
-//     Node[] nodes;
-    
-//     public MyHashMap() {
-//         nodes = new Node[10000];
+
+/**
+ * Your MyHashMap object will be instantiated and called as such:
+ * MyHashMap obj = new MyHashMap();
+ * obj.put(key,value);
+ * int param_2 = obj.get(key);
+ * obj.remove(key);
+ */

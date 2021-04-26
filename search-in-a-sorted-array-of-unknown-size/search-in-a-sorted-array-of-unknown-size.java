@@ -1,40 +1,32 @@
-// Time Complexity : O(logn)
-// Space Complexity : O(1)
-// Did this code successfully run on Leetcode : Yes
-​
 /**
  * // This is ArrayReader's API interface.
  * // You should not implement it, or speculate about its implementation
  * interface ArrayReader {
- *     public int get(int index) {}
+ *     public int get(int index) {}
  * }
  */
-​
-​
-// Initially, start with 2 elements and if the target is greater than the element at 'r', double the value of 'r'. 
+
 class Solution {
-    public int search(ArrayReader reader, int target) {
-        int l = 0;
-        int r = 1;
-        
-        while ( l <= r)
-        {
-          if ( target > reader.get(r))
-          {
-            l = r;
-            r = r * 2;
-          }
-          else
-          {
-            int mid = l + (r-l)/2;
-            if ( reader.get(mid) == target)
-                return mid;
-            else if (target < reader.get(mid))
-                r = mid - 1;
-            else
-                l = mid+1;
-          }
-        }
-        return -1;
-    }
+    public int search(ArrayReader reader, int target) {
+        int low = 0;
+        int high = 1;
+        while(reader.get(high) < target){
+            low = high;
+            high = high * 2;
+        }
+        return binarySearch(reader, target, low, high);
+    }
+   private int binarySearch(ArrayReader reader, int target, int low, int high){     
+        while ( low <= high){
+            int mid = low + (high-low)/2;
+            if (reader.get(mid) == target){
+                return mid;
+            } else if (reader.get(mid) < target){
+                low = mid+1;
+            } else {
+                high = mid-1 ;
+            }
+        }
+        return -1;
+   }
 }

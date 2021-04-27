@@ -29,8 +29,9 @@ class Solution {
         path.add(root.val);
         currSum = currSum + root.val;
         if (root.left == null && root.right == null && currSum == targetSum)
-            result.add(new ArrayList<>(path));
-        helper(root.left, targetSum, new ArrayList<>(path), currSum);
-        helper(root.right, targetSum, new ArrayList<>(path), currSum);
+            result.add(new ArrayList(path));
+        helper(root.left, targetSum, path, currSum);
+        helper(root.right, targetSum, path, currSum);
+        path.remove(path.size()-1);
     }
 }

@@ -14,45 +14,34 @@
  * }
  */
 class Solution {
-     TreeNode first;
-     TreeNode last;
-     boolean flag;
-     TreeNode prev;
+    TreeNode first;
+    TreeNode last;
+    TreeNode prev;
+    boolean breach = false;
     public void recoverTree(TreeNode root) {
-       if ( root == null)
-           return;
-        flag = false;
-        inorder(root);
-        swap(first,last);
-        return;
-    }
-    private void inorder(TreeNode root)
-    {
-        //base
         if (root == null)
-          return;
-        //logic
-        inorder(root.left);
-        if (prev != null && prev.val >= root.val)
-        {
-            if (!flag)
-            {
-                first = prev;
-                last = root;
-                flag = true;
-            }
-            else
-            {
-                last = root;
-            }
-        }
-       prev = root;
-       inorder(root.right);
-    }
-    private void swap(TreeNode first, TreeNode last)
-    {
+            return;
+        inorder(root);
         int temp = first.val;
         first.val = last.val;
         last.val = temp;
-    }   
+    }
+    private void inorder(TreeNode root){
+        //base
+        if ( root == null)
+            return;
+        //logic
+        inorder(root.left);
+        if ( prev != null && prev.val >= root.val){
+            if (!breach){
+                first = prev;
+                last = root;
+                breach = true;
+            } else {
+                last = root;
+            }
+        }
+        prev = root;
+        inorder(root.right);
+    } 
 }

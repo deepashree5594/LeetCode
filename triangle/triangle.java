@@ -3,7 +3,7 @@ class Solution {
         if (triangle == null || triangle.size() == 0)
             return 0;
         int m = triangle.size();
-        int n = triangle.get(m-1).size();
+        // int n = triangle.get(m-1).size();
         List<Integer> lastRow = triangle.get(m-1);
         int[] dp = new int[m+1];
         for ( int i = m-1; i>=0; i--){

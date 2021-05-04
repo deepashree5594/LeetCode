@@ -49,6 +49,7 @@ class Solution{
             }
         }
         for (int i = min; i <= max; i++){
+           // Collections.sort(map.get(i));
             result.add(map.get(i));
         }
         return result;

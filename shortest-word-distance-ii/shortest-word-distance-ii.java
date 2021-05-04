@@ -1,3 +1,6 @@
+//TC: O(N)
+//SC: O(N)
+//Did it run successfully on Leetcode?:Yes
 class WordDistance {
     HashMap<String, List<Integer>> map;
     public WordDistance(String[] wordsDict) {
@@ -12,12 +15,13 @@ class WordDistance {
     }
     
     public int shortest(String word1, String word2) {
-        List<Integer> indexList1 = map.get(word1);
-        List<Integer> indexList2 = map.get(word2);
+        List<Integer> indexList1 = map.get(word1); //TC:O(1)
+        List<Integer> indexList2 = map.get(word2); //TC:O(1)
         int i = 0;
         int j = 0;
         int minDistance = Integer.MAX_VALUE;
-        while (i < indexList1.size() && j < indexList2.size()){
+        //use 2 pointers since they are sorted
+        while (i < indexList1.size() && j < indexList2.size()){ //TC:O(N)
             int val1 = indexList1.get(i);
             int val2 = indexList2.get(j);
             minDistance = Math.min(minDistance, Math.abs(val1 - val2));

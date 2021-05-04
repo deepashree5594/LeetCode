@@ -1,3 +1,6 @@
+//TC:O(ElogE)
+//SC:O(V+E)
+//Did it run successfully on Leetcode?:Yes
 class Solution {
     class DSU{
         int[] parent;

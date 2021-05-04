@@ -1,37 +1,28 @@
+
 /* The knows API is defined in the parent class Relation.
       boolean knows(int a, int b); */
 
-//TC:O(N)
-//SC:O(1)
-//Did it run successfully on Leetcode? : Yes
 public class Solution extends Relation {
     public int findCelebrity(int n) {
+        if (n < 2)
+          return -1;
         int candidate = 0;
-        for (int i = 1; i < n; i++)
-        {
-            // look for requirement 1
-            if (knows(candidate, i))
-            {
+        for (int i = 1; i < n; i++){
+            if (knows(candidate, i)){
                 candidate = i;
             }
         }
-        
-        for (int i = 0; i < n; i++)
-        {
-            // Skip the condition of candidate knows himself/herself
-            
-            if (candidate == i) continue;
-            
-            // If candidate knows i or i doesn't know candidate, then candidate is not celebrity
-            if (knows(candidate,i) || !knows(i, candidate))
-                return -1;
+        for (int i = 0; i < n; i++){
+            if (i == candidate){
+                continue;
+            }
+            if (knows(candidate, i) || !knows(i, candidate)){
+                       return -1;
+            }
         }
         return candidate;
     }
 }
-
-
-
 // However in such problems discussing the naive n^2 algorithm  and then moving to the intuition behind the linear algorithm is what helps remembering the solution the most.
 
 // Adding on to what you just coded.

@@ -1,3 +1,6 @@
+//DFS
+//TC: O(M*N), N : no. of input equations and M : no. of queries.
+//SC: O(N) recursive stack
 class Solution {
     class Node {
         String key;

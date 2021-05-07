@@ -11,6 +11,7 @@ class Solution {
                 return b[1] - a[1];
              return a[0] - b[0];
             });
+        System.out.println(Arrays.deepToString(envelopes));
         int len = 1;
         int[] arr = new int[envelopes.length];
         
